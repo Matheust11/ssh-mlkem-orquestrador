@@ -494,6 +494,116 @@ def tab_condicoes(man):
 \\end{{table}}"""
 
 
+# ------------------------------------------------------------------
+# Tabelas dos apêndices
+# ------------------------------------------------------------------
+
+def tab_cpu_modos(resumo, lado, titulo, rotulo):
+    """CPU em modo usuário e sistema, com IC95, para o cliente ou o servidor."""
+    linhas = []
+    for c in COND:
+        for i, s in enumerate(CEN):
+            cel = ROTC[c] if i == 0 else ""
+            partes = []
+            for modo in ("user", "sys"):
+                r = resumo[(c, f"{lado}_cpu_{modo}_ms", s)]
+                partes += [v(r["media"]), v(r["ic95_inf"]), v(r["ic95_sup"])]
+            linhas.append(f"        {cel} & {ROT[s]} & " + " & ".join(partes) + " \\\\")
+        if c != COND[-1]:
+            linhas.append("        \\addlinespace")
+    return f"""\\begin{{table}}[H]
+    \\centering
+    \\caption{{{titulo}}}
+    \\label{{{rotulo}}}
+    \\small
+    \\setlength{{\\tabcolsep}}{{4pt}}
+    \\resizebox{{\\linewidth}}{{!}}{{%
+    \\begin{{tabular}}{{llrrrrrr}}
+        \\toprule
+        & & \\multicolumn{{3}}{{c}}{{\\textbf{{Modo usuário}}}} & \\multicolumn{{3}}{{c}}{{\\textbf{{Modo sistema}}}} \\\\
+        \\cmidrule(lr){{3-5}} \\cmidrule(lr){{6-8}}
+        \\textbf{{Condição}} & \\textbf{{Cenário}} & \\textbf{{Média}} & \\textbf{{IC95 mín.}} & \\textbf{{IC95 máx.}} &
+        \\textbf{{Média}} & \\textbf{{IC95 mín.}} & \\textbf{{IC95 máx.}} \\\\
+        \\midrule
+{chr(10).join(linhas)}
+        \\bottomrule
+    \\end{{tabular}}}}
+    \\fonte{{Elaborada pelo autor (2026). Valores em ms por conexão.}}
+\\end{{table}}"""
+
+
+def tab_cauda(resumo):
+    """Percentil 95 e coeficiente de variação das medidas de tempo."""
+    metricas = ["T_kex_ms", "T_transporte_ms", "T_autenticado_proc_ms", "T_canal_proc_ms"]
+    linhas = []
+    for c in COND:
+        for i, s in enumerate(CEN):
+            cel = ROTC[c] if i == 0 else ""
+            partes = []
+            for m in metricas:
+                r = resumo[(c, m, s)]
+                partes += [v(r["p95"]), v(r["cv_pct"], 1)]
+            linhas.append(f"        {cel} & {ROT[s]} & " + " & ".join(partes) + " \\\\")
+        if c != COND[-1]:
+            linhas.append("        \\addlinespace")
+    cab = " & ".join(f"\\multicolumn{{2}}{{c}}{{{n}}}" for n in
+                     ("$T_{\\mathrm{KEX}}$", "$T_{\\mathrm{transporte}}$", "$T_{\\mathrm{aut}}$", "$T_{\\mathrm{canal}}$"))
+    return f"""\\begin{{table}}[H]
+    \\centering
+    \\caption{{Percentil 95 (P95, em ms) e coeficiente de variação (CV, em \\%) das medidas de tempo.}}
+    \\label{{tab:ap_cauda}}
+    \\small
+    \\setlength{{\\tabcolsep}}{{3pt}}
+    \\resizebox{{\\linewidth}}{{!}}{{%
+    \\begin{{tabular}}{{llrrrrrrrr}}
+        \\toprule
+        & & {cab} \\\\
+        \\cmidrule(lr){{3-4}} \\cmidrule(lr){{5-6}} \\cmidrule(lr){{7-8}} \\cmidrule(lr){{9-10}}
+        \\textbf{{Condição}} & \\textbf{{Cenário}} & P95 & CV & P95 & CV & P95 & CV & P95 & CV \\\\
+        \\midrule
+{chr(10).join(linhas)}
+        \\bottomrule
+    \\end{{tabular}}}}
+    \\fonte{{Elaborada pelo autor (2026). Trinta conexões por cenário e condição.}}
+\\end{{table}}"""
+
+
+def tab_wilcoxon(testes):
+    """Estatística W de Wilcoxon, p sem correção e p com correção de Holm."""
+    metricas = [("T_kex_ms", "$T_{\\mathrm{KEX}}$"), ("T_transporte_ms", "$T_{\\mathrm{transporte}}$"),
+                ("T_autenticado_proc_ms", "$T_{\\mathrm{aut}}$"), ("T_canal_proc_ms", "$T_{\\mathrm{canal}}$")]
+    pares = ["hibrido-classico", "pqc-classico", "hibrido-pqc"]
+    linhas = []
+    for m, nome in metricas:
+        for i, c in enumerate(COND):
+            t = testes.get((c, m), {})
+            cel = nome if i == 0 else ""
+            partes = []
+            for par in pares:
+                partes += [v(t.get(f"wilcoxon_W[{par}]"), 0), pv(t.get(f"p[{par}]")), pv(t.get(f"p_holm[{par}]"))]
+            linhas.append(f"        {cel} & {ROTC[c]} & " + " & ".join(partes) + " \\\\")
+        if m != metricas[-1][0]:
+            linhas.append("        \\addlinespace")
+    return f"""\\begin{{table}}[H]
+    \\centering
+    \\caption{{Testes de Wilcoxon pareados das medidas de tempo: estatística $W$, valor $p$ sem correção e com correção de Holm.}}
+    \\label{{tab:ap_wilcoxon}}
+    \\small
+    \\setlength{{\\tabcolsep}}{{3pt}}
+    \\resizebox{{\\linewidth}}{{!}}{{%
+    \\begin{{tabular}}{{llrrrrrrrrr}}
+        \\toprule
+        & & \\multicolumn{{3}}{{c}}{{\\textbf{{Híbr.--Cláss.}}}} & \\multicolumn{{3}}{{c}}{{\\textbf{{PQC--Cláss.}}}} & \\multicolumn{{3}}{{c}}{{\\textbf{{Híbr.--PQC}}}} \\\\
+        \\cmidrule(lr){{3-5}} \\cmidrule(lr){{6-8}} \\cmidrule(lr){{9-11}}
+        \\textbf{{Medida}} & \\textbf{{Condição}} & $W$ & $p$ & $p_{{\\mathrm{{Holm}}}}$ & $W$ & $p$ & $p_{{\\mathrm{{Holm}}}}$ & $W$ & $p$ & $p_{{\\mathrm{{Holm}}}}$ \\\\
+        \\midrule
+{chr(10).join(linhas)}
+        \\bottomrule
+    \\end{{tabular}}}}
+    \\fonte{{Elaborada pelo autor (2026). Trinta blocos pareados por condição; correção de Holm aplicada às três comparações de cada medida e condição.}}
+\\end{{table}}"""
+
+
 def main():
     dir_c, dir_fig, saida = sys.argv[1], Path(sys.argv[2]), Path(sys.argv[3])
     ex, resumo, testes, comp, est, cont, man = carregar(dir_c)
@@ -538,6 +648,15 @@ def main():
         "tabCDoisMemoria": tab_memoria(resumo, testes),
         "tabCDoisRede": tab_rede(resumo, ex),
         "tabCDoisPacotes": tab_pacotes(resumo),
+        "tabApAut": tab_descritiva(resumo, "T_autenticado_proc_ms",
+                                   "Estatísticas descritivas de $T_{\\mathrm{aut}}$ por condição de rede.",
+                                   "tab:ap_aut"),
+        "tabApCpuCliente": tab_cpu_modos(resumo, "cli", "Tempo de CPU do cliente em modo usuário e em modo sistema.",
+                                         "tab:ap_cpu_cliente"),
+        "tabApCpuServidor": tab_cpu_modos(resumo, "srv", "Tempo de CPU do servidor em modo usuário e em modo sistema.",
+                                          "tab:ap_cpu_servidor"),
+        "tabApCauda": tab_cauda(resumo),
+        "tabApWilcoxon": tab_wilcoxon(testes),
     }
     with open(saida, "w") as f:
         f.write("% Gerado automaticamente por gerar_tex_campanha.py a partir de\n")
