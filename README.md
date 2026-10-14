@@ -1,18 +1,25 @@
 # Orquestrador da campanha experimental (ML-KEM no SSH)
 
-Um único comando coleta todas as métricas pedidas pelo orientador, para
-os três cenários (clássico, híbrido e PQC puro) e para cada condição de
-rede configurada, e no final calcula as estatísticas.
+Scripts e dados da avaliação experimental do mecanismo pós-quântico
+ML-KEM-768 no estabelecimento de chaves do SSH, desenvolvidos para o
+Trabalho de Conclusão de Curso *Implementação do Algoritmo Pós-Quântico
+ML-KEM no Protocolo SSH e Avaliação de Desempenho* (UFCG, 2026).
+
+Um único comando coleta todas as métricas, para os três cenários
+(clássico, híbrido e PQC puro) e para cada condição de rede configurada,
+e no final calcula as estatísticas.
 
 ```
 orquestrador/
 ├── orquestrador.py        coleta (roda no PC hospedeiro, cliente SSH)
 ├── analisar.py            estatísticas (chamado ao final; também roda sozinho)
 ├── medidor.c              mede CPU e pico de RSS do ssh (compilado automaticamente)
+├── gerar_tex_campanha.py  figuras e tabelas LaTeX a partir de uma campanha
 ├── campanha.toml          configuração: cenários, condições de rede, repetições
-└── servidor/
-    ├── preparar_servidor.sh   configuração única da VM (com sudo)
-    └── agente_exp.sh          agente lido pelo orquestrador na VM
+├── servidor/
+│   ├── preparar_servidor.sh   configuração única da VM (com sudo)
+│   └── agente_exp.sh          agente lido pelo orquestrador na VM
+└── campanhas/             dados publicados (veja "Dados publicados")
 ```
 
 ## Como funciona
@@ -51,7 +58,7 @@ orquestrador/
 Copie a pasta `servidor/` para a VM e execute:
 
 ```bash
-sudo bash preparar_servidor.sh matheus /usr/local/sbin/sshd 2222
+sudo bash preparar_servidor.sh <usuario> /usr/local/sbin/sshd 2222
 ```
 
 O script mostra se o kernel permite reiniciar `memory.peak` (kernel
@@ -60,8 +67,10 @@ confiável.
 
 ### No hospedeiro
 
-- Login sem senha (chave pública) para `matheus@192.168.56.102`, tanto
-  na porta 22 quanto na 2222.
+- Login sem senha (chave pública) para `<usuario>@<ip-do-servidor>`,
+  tanto na porta 22 quanto na 2222. O usuário, o IP do servidor, a
+  interface de rede e os caminhos dos executáveis são definidos em
+  `campanha.toml`.
 - `sudo` disponível (o orquestrador pede a senha uma vez, no início),
   para `tcpdump` e `tc`.
 - `tshark`, `tcpdump`, `tc`, `ping`, `ethtool` e Python 3.11+.
@@ -71,7 +80,7 @@ confiável.
 ## Execução
 
 ```bash
-cd ~/Documents/Academicos/TCC/tcc_mlkem/orquestrador
+cd orquestrador
 
 # 1) Validação curta (2 rodadas por condição) — faça sempre antes
 python3 orquestrador.py --teste
@@ -196,3 +205,33 @@ continua no ar.
   compartilhados ou chaves de sessão.
 - O orquestrador remove o netem do cliente e do servidor ao terminar,
   inclusive se for interrompido com Ctrl+C.
+
+## Dados publicados
+
+A pasta `campanhas/` contém as três campanhas usadas no TCC:
+
+| Pasta | Conteúdo |
+|---|---|
+| `20261013T195056_teste` | Primeira execução piloto (2 rodadas por condição). Revelou problemas de instrumentação, corrigidos antes da campanha oficial. |
+| `20261013T200217_teste` | Segunda execução piloto, que confirmou a coleta. |
+| `20261013T200602` | Campanha oficial: 3 cenários × 4 condições × 30 rodadas e testes de estabilidade. |
+
+Os dados das execuções piloto não foram usados nos resultados. O
+`campanha.toml` de cada pasta registra a configuração exata usada, e o
+`manifesto.json`, as versões, os *commits*, o hardware e as condições de
+rede. Nenhum arquivo contém chaves privadas, segredos compartilhados ou
+chaves de sessão; o tráfego SSH das capturas é cifrado.
+
+## Como citar
+
+TORRES SOBRINHO, M. A. **ssh-mlkem-orquestrador**: orquestrador de coleta
+e dados experimentais do ML-KEM-768 no SSH. 2026. Disponível em:
+https://github.com/Matheust11/ssh-mlkem-orquestrador.
+
+## Licença
+
+- **Código** (scripts, `medidor.c`, scripts do servidor e arquivos de
+  configuração): licença MIT, em [`LICENSE`](LICENSE).
+- **Dados** (conteúdo da pasta `campanhas/`): licença Creative Commons
+  Atribuição 4.0 Internacional (CC BY 4.0), em
+  [`campanhas/LICENSE.md`](campanhas/LICENSE.md).
