@@ -1,0 +1,13 @@
+condicao,cenario,tentativas,sucessos,falhas,timeouts,fallback,comando_verificado,desconexao_anormal,sem_fluxo_na_captura,validas_protocolo,excluidas_protocolo,taxa_sucesso_pct
+base,classico,2,2,0,0,0,2,0,0,2,0,100
+base,hibrido,2,2,0,0,0,2,0,0,2,0,100
+base,pqc,2,2,0,0,0,2,0,0,2,0,100
+rtt50,classico,2,2,0,0,0,2,0,0,2,0,100
+rtt50,hibrido,2,2,0,0,0,2,0,0,2,0,100
+rtt50,pqc,2,2,0,0,0,2,0,0,2,0,100
+rtt100,classico,2,2,0,0,0,2,0,0,2,0,100
+rtt100,hibrido,2,2,0,0,0,2,0,0,2,0,100
+rtt100,pqc,2,2,0,0,0,2,0,0,2,0,100
+banda10,classico,2,2,0,0,0,2,0,0,2,0,100
+banda10,hibrido,2,2,0,0,0,2,0,0,2,0,100
+banda10,pqc,2,2,0,0,0,2,0,0,2,0,100

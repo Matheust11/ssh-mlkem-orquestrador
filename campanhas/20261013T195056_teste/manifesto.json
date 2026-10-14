@@ -1,0 +1,229 @@
+{
+  "inicio": "2026-10-13T19:51:07.497-03:00",
+  "linha_de_comando": "orquestrador.py --teste",
+  "argumentos": {
+    "config": "/home/matheus-dev/Documents/Academicos/TCC/tcc_mlkem/orquestrador/campanha.toml",
+    "saida": "/home/matheus-dev/Documents/Academicos/TCC/tcc_mlkem/orquestrador/campanhas",
+    "condicoes": null,
+    "repeticoes": null,
+    "teste": true,
+    "sem_estabilidade": false,
+    "com_primitivas": false,
+    "com_vazao": false
+  },
+  "configuracao": {
+    "cliente": {
+      "ssh_bin": "/usr/local/bin/ssh",
+      "interface": "vboxnet0",
+      "ip": "192.168.56.1",
+      "openssh_src": "~/openssh",
+      "liboqs_src": "~/liboqs"
+    },
+    "servidor": {
+      "host": "192.168.56.102",
+      "usuario": "matheus",
+      "porta_experimento": 2222,
+      "porta_controle": 22
+    },
+    "campanha": {
+      "repeticoes": 2,
+      "aquecimento": 1,
+      "pausa_s": 0.5,
+      "timeout_conexao_s": 30,
+      "comando_verificacao": "echo ok"
+    },
+    "cenarios": [
+      {
+        "nome": "classico",
+        "kex": "curve25519-sha256"
+      },
+      {
+        "nome": "hibrido",
+        "kex": "mlkem768x25519-sha256"
+      },
+      {
+        "nome": "pqc",
+        "kex": "mlkem768-sha256"
+      }
+    ],
+    "condicoes": [
+      {
+        "nome": "base",
+        "rtt_ms": 0,
+        "banda_mbit": 0
+      },
+      {
+        "nome": "rtt50",
+        "rtt_ms": 50,
+        "banda_mbit": 0
+      },
+      {
+        "nome": "rtt100",
+        "rtt_ms": 100,
+        "banda_mbit": 0
+      },
+      {
+        "nome": "banda10",
+        "rtt_ms": 0,
+        "banda_mbit": 10
+      }
+    ],
+    "estabilidade": {
+      "executar": true,
+      "repeticoes": 1,
+      "rekey_limite": "1M",
+      "rekey_bytes": 8388608,
+      "kex_nao_suportado": "ecdh-sha2-nistp256",
+      "kex_preferido_fallback": "sntrup761x25519-sha512"
+    },
+    "opcionais": {
+      "primitivas": {
+        "dir_origem": "~/Documents/Academicos/TCC/tcc_mlkem/metrica5_cpu_cycles",
+        "repeticoes": 1
+      },
+      "vazao": {
+        "concorrencias": [
+          1,
+          2,
+          4,
+          8
+        ],
+        "rodadas": 1,
+        "pausa_s": 2.0
+      }
+    }
+  },
+  "hashes_scripts": {
+    "analisar.py": "d82bd60b37013f7504dc81f13c21bdcfb896b931b3d0dbd6941367a8dedd4ece",
+    "campanha.toml": "447413d9cc07a9a133e59477f6f712a61216bcac03ed0d37a33449d74f5b56a5",
+    "orquestrador.py": "9447f321b8610a5f5db751cc1575878f4c51f02b89420dfb9e2bbe201f3afa15",
+    "servidor/agente_exp.sh": "8354e8a932c1a55d83947ac73a53db3a03c34b7ccc635fd6a988a8754ac86889",
+    "servidor/preparar_servidor.sh": "0e9d903d16895027fbf0028ea51024932cfc45b281b4f1df2979584e12c4bf32"
+  },
+  "cliente": {
+    "uname": "Linux U-9 6.8.0-146-generic #146-Ubuntu SMP PREEMPT_DYNAMIC Thu Sep  3 16:12:30 UTC 2026 x86_64 x86_64 x86_64 GNU/Linux",
+    "os": "PRETTY_NAME=\"Ubuntu 24.04.5 LTS\"",
+    "cpu": "model name\t: Intel(R) Core(TM) i7-3770 CPU @ 3.40GHz",
+    "nproc": "8",
+    "memoria": "MemTotal:        7803224 kB",
+    "governador_cpu": "schedutil",
+    "ssh_versao": "OpenSSH_10.3-2026-05_p1, Open Quantum Safe 2026-05, OpenSSL 3.0.13 30 Jan 2024",
+    "openssl": "OpenSSL 3.0.13 30 Jan 2024 (Library: OpenSSL 3.0.13 30 Jan 2024)",
+    "compilador_ssh": "GCC: (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+    "tcpdump": [
+      "tcpdump version 4.99.4",
+      "libpcap version 1.10.4 (with TPACKET_V3)"
+    ],
+    "tshark": [
+      "TShark (Wireshark) 4.2.2 (Git v4.2.2 packaged as 4.2.2-1.1build3)."
+    ],
+    "python": "3.12.3 (main, Aug 31 2026, 10:18:26) [GCC 13.3.0]",
+    "offloads": "tcp-segmentation-offload: on\ngeneric-segmentation-offload: on\ngeneric-receive-offload: on"
+  },
+  "compilacao": {
+    "openssh_commit": "08710c570b0018e7ee1c4ad0e6534bff4afbba58",
+    "openssh_describe": "V_7_7_P1-4526-g08710c570",
+    "openssh_configure": "$ ./configure --with-oqs-dir=/usr/local 'LDFLAGS=-L/usr/local/lib -L/usr/local/lib64' LIBS=-loqs --prefix=/usr/local",
+    "openssh_cc": "CC=cc",
+    "openssh_cflags": "CFLAGS=-g -O2 -pipe -Wno-error=format-truncation -Wall -Wextra -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wsizeof-pointer-memaccess -Wno-pointer-sign -Wno-unused-parameter -Wno-unused-result -Wimplicit-fallthrough -Wmisleading-indentation -fno-strict-aliasing -D_FORTIFY_SOURCE=2 -ftrapv -fzero-call-used-regs=used -ftrivial-auto-var-init=zero -fno-builtin-memset -fstack-protector-strong -fPIE",
+    "liboqs_commit": "5a1a854b0dc9f2141bdc771c555ee60c37950183",
+    "liboqs_versao": "#define OQS_VERSION_TEXT \"0.16.0\"",
+    "liboqs_build_type": "CMAKE_BUILD_TYPE:STRING=Release",
+    "liboqs_compilador": "CMAKE_C_COMPILER:FILEPATH=/usr/bin/cc",
+    "liboqs_cflags": "CMAKE_C_FLAGS:STRING="
+  },
+  "servidor": "### uname\nLinux matheus-VirtualBox 7.0.0-28-generic #28~24.04.1-Ubuntu SMP PREEMPT_DYNAMIC Wed Jul  1 15:50:57 UTC 2 x86_64 x86_64 x86_64 GNU/Linux\n### os-release\nPRETTY_NAME=\"Ubuntu 24.04.3 LTS\"\nNAME=\"Ubuntu\"\nVERSION_ID=\"24.04\"\nVERSION=\"24.04.3 LTS (Noble Numbat)\"\nVERSION_CODENAME=noble\nID=ubuntu\nID_LIKE=debian\nHOME_URL=\"https://www.ubuntu.com/\"\nSUPPORT_URL=\"https://help.ubuntu.com/\"\nBUG_REPORT_URL=\"https://bugs.launchpad.net/ubuntu/\"\nPRIVACY_POLICY_URL=\"https://www.ubuntu.com/legal/terms-and-policies/privacy-policy\"\nUBUNTU_CODENAME=noble\nLOGO=ubuntu-logo\n### nproc\n3\n### lscpu\nCPU(s):                                  3\nModel name:                              Intel(R) Core(TM) i7-3770 CPU @ 3.40GHz\nBIOS Model name:                           CPU @ 0.0GHz\nThread(s) per core:                      1\nCore(s) per socket:                      3\nSocket(s):                               1\n### memoria\n               total        used        free      shared  buff/cache   available\nMem:      4101275648  1186095104   830341120    26378240  2342621184  2915180544\nSwap:     4106219520           0  4106219520\n### sshd_bin\nExecStart={ path=/usr/local/sbin/sshd ; argv[]=/usr/local/sbin/sshd -D -f /etc/ssh-exp/sshd_config ; ignore_errors=no ; start_time=[Tue 2026-10-13 19:47:36 -03] ; stop_time=[n/a] ; pid=3408 ; code=(null) ; status=0/0 }\n### sshd_config_efetiva\nport 2222\ncompression no\nciphers chacha20-poly1305@openssh.com,aes128-ctr,aes192-ctr,aes256-ctr,aes128-gcm@openssh.com,aes256-gcm@openssh.com\nmacs umac-64-etm@openssh.com,umac-128-etm@openssh.com,hmac-sha2-256-etm@openssh.com,hmac-sha2-512-etm@openssh.com,hmac-sha1-etm@openssh.com,umac-64@openssh.com,umac-128@openssh.com,hmac-sha2-256,hmac-sha2-512,hmac-sha1\nkexalgorithms curve25519-sha256,mlkem768x25519-sha256,mlkem768-sha256\nhostkeyalgorithms ssh-ed25519-cert-v01@openssh.com,ecdsa-sha2-nistp256-cert-v01@openssh.com,ecdsa-sha2-nistp384-cert-v01@openssh.com,ecdsa-sha2-nistp521-cert-v01@openssh.com,sk-ssh-ed25519-cert-v01@openssh.com,sk-ecdsa-sha2-nistp256-cert-v01@openssh.com,webauthn-sk-ecdsa-sha2-nistp256-cert-v01@openssh.com,rsa-sha2-512-cert-v01@openssh.com,rsa-sha2-256-cert-v01@openssh.com,ssh-ed25519,ecdsa-sha2-nistp256,ecdsa-sha2-nistp384,ecdsa-sha2-nistp521,sk-ssh-ed25519@openssh.com,sk-ecdsa-sha2-nistp256@openssh.com,webauthn-sk-ecdsa-sha2-nistp256@openssh.com,rsa-sha2-512,rsa-sha2-256\nloglevel INFO\nmaxstartups 10:30:100\nrekeylimit 0 0\n### sshd_versao\nOpenSSH_10.3-2026-05_p1, Open Quantum Safe 2026-05, OpenSSL 3.0.13 30 Jan 2024\n### offloads\n-- enp0s3\ntcp-segmentation-offload: on\ngeneric-segmentation-offload: on\ngeneric-receive-offload: on\n-- enp0s8\ntcp-segmentation-offload: on\ngeneric-segmentation-offload: on\ngeneric-receive-offload: on\n### kernel_memory_peak_resetavel\nsim\n",
+  "condicoes": [
+    {
+      "nome": "base",
+      "rtt_config_ms": 0,
+      "banda_config_mbit": 0,
+      "inicio": "2026-10-13T19:51:09.078-03:00",
+      "qdisc_cliente": "qdisc fq_codel 0: root refcnt 2 limit 10240p flows 1024 quantum 1514 target 5ms interval 100ms memory_limit 32Mb ecn drop_batch 64",
+      "qdisc_servidor": "qdisc fq_codel 0: root refcnt 2 limit 10240p flows 1024 quantum 1514 target 5ms interval 100ms memory_limit 32Mb ecn drop_batch 64 \n",
+      "perda_induzida": "nenhuma",
+      "ping": {
+        "rtt_min_ms": 0.134,
+        "rtt_media_ms": 0.194,
+        "rtt_max_ms": 0.286,
+        "rtt_mdev_ms": 0.049,
+        "perda_pct": 0.0
+      },
+      "aquecimento_por_cenario": 1,
+      "tcpdump": {
+        "pacotes_capturados": 436,
+        "descartados_kernel": 0
+      },
+      "fim": "2026-10-13T19:51:22.397-03:00"
+    },
+    {
+      "nome": "rtt50",
+      "rtt_config_ms": 50,
+      "banda_config_mbit": 0,
+      "inicio": "2026-10-13T19:51:22.436-03:00",
+      "qdisc_cliente": "qdisc netem 8001: root refcnt 2 limit 10000 delay 25ms",
+      "qdisc_servidor": "qdisc netem 8001: root refcnt 2 limit 10000 delay 25ms\n",
+      "perda_induzida": "nenhuma",
+      "ping": {
+        "rtt_min_ms": 50.257,
+        "rtt_media_ms": 50.515,
+        "rtt_max_ms": 50.742,
+        "rtt_mdev_ms": 0.137,
+        "perda_pct": 0.0
+      },
+      "aquecimento_por_cenario": 1,
+      "tcpdump": {
+        "pacotes_capturados": 651,
+        "descartados_kernel": 0
+      },
+      "fim": "2026-10-13T19:51:47.115-03:00"
+    },
+    {
+      "nome": "rtt100",
+      "rtt_config_ms": 100,
+      "banda_config_mbit": 0,
+      "inicio": "2026-10-13T19:51:47.206-03:00",
+      "qdisc_cliente": "qdisc netem 8002: root refcnt 2 limit 10000 delay 50ms",
+      "qdisc_servidor": "qdisc netem 8002: root refcnt 2 limit 10000 delay 50ms\n",
+      "perda_induzida": "nenhuma",
+      "ping": {
+        "rtt_min_ms": 100.176,
+        "rtt_media_ms": 100.363,
+        "rtt_max_ms": 100.628,
+        "rtt_mdev_ms": 0.155,
+        "perda_pct": 0.0
+      },
+      "aquecimento_por_cenario": 1,
+      "tcpdump": {
+        "pacotes_capturados": 655,
+        "descartados_kernel": 0
+      },
+      "fim": "2026-10-13T19:52:23.686-03:00"
+    },
+    {
+      "nome": "banda10",
+      "rtt_config_ms": 0,
+      "banda_config_mbit": 10,
+      "inicio": "2026-10-13T19:52:23.826-03:00",
+      "qdisc_cliente": "qdisc netem 8003: root refcnt 2 limit 10000 rate 10Mbit",
+      "qdisc_servidor": "qdisc netem 8003: root refcnt 2 limit 10000 rate 10Mbit\n",
+      "perda_induzida": "nenhuma",
+      "ping": {
+        "rtt_min_ms": 0.409,
+        "rtt_media_ms": 0.754,
+        "rtt_max_ms": 1.156,
+        "rtt_mdev_ms": 0.242,
+        "perda_pct": 0.0
+      },
+      "aquecimento_por_cenario": 1,
+      "tcpdump": {
+        "pacotes_capturados": 426,
+        "descartados_kernel": 0
+      },
+      "fim": "2026-10-13T19:52:58.244-03:00"
+    }
+  ],
+  "id_campanha": "20261013T195056_teste",
+  "servidor_interface": "enp0s8",
+  "fim": "2026-10-13T19:52:58.283-03:00"
+}

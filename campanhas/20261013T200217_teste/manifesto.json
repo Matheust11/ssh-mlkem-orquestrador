@@ -1,0 +1,230 @@
+{
+  "inicio": "2026-10-13T20:02:17.697-03:00",
+  "linha_de_comando": "orquestrador.py --teste",
+  "argumentos": {
+    "config": "/home/matheus-dev/Documents/Academicos/TCC/tcc_mlkem/orquestrador/campanha.toml",
+    "saida": "/home/matheus-dev/Documents/Academicos/TCC/tcc_mlkem/orquestrador/campanhas",
+    "condicoes": null,
+    "repeticoes": null,
+    "teste": true,
+    "sem_estabilidade": false,
+    "com_primitivas": false,
+    "com_vazao": false
+  },
+  "configuracao": {
+    "cliente": {
+      "ssh_bin": "/usr/local/bin/ssh",
+      "interface": "vboxnet0",
+      "ip": "192.168.56.1",
+      "openssh_src": "~/openssh",
+      "liboqs_src": "~/liboqs"
+    },
+    "servidor": {
+      "host": "192.168.56.102",
+      "usuario": "matheus",
+      "porta_experimento": 2222,
+      "porta_controle": 22
+    },
+    "campanha": {
+      "repeticoes": 2,
+      "aquecimento": 1,
+      "pausa_s": 0.5,
+      "timeout_conexao_s": 30,
+      "comando_verificacao": "echo ok"
+    },
+    "cenarios": [
+      {
+        "nome": "classico",
+        "kex": "curve25519-sha256"
+      },
+      {
+        "nome": "hibrido",
+        "kex": "mlkem768x25519-sha256"
+      },
+      {
+        "nome": "pqc",
+        "kex": "mlkem768-sha256"
+      }
+    ],
+    "condicoes": [
+      {
+        "nome": "base",
+        "rtt_ms": 0,
+        "banda_mbit": 0
+      },
+      {
+        "nome": "rtt50",
+        "rtt_ms": 50,
+        "banda_mbit": 0
+      },
+      {
+        "nome": "rtt100",
+        "rtt_ms": 100,
+        "banda_mbit": 0
+      },
+      {
+        "nome": "banda10",
+        "rtt_ms": 0,
+        "banda_mbit": 10
+      }
+    ],
+    "estabilidade": {
+      "executar": true,
+      "repeticoes": 1,
+      "rekey_limite": "1M",
+      "rekey_bytes": 8388608,
+      "kex_nao_suportado": "diffie-hellman-group1-sha1",
+      "kex_preferido_fallback": "diffie-hellman-group1-sha1",
+      "kex_servidor_anunciados": 69
+    },
+    "opcionais": {
+      "primitivas": {
+        "dir_origem": "~/Documents/Academicos/TCC/tcc_mlkem/metrica5_cpu_cycles",
+        "repeticoes": 1
+      },
+      "vazao": {
+        "concorrencias": [
+          1,
+          2,
+          4,
+          8
+        ],
+        "rodadas": 1,
+        "pausa_s": 2.0
+      }
+    }
+  },
+  "hashes_scripts": {
+    "analisar.py": "d82bd60b37013f7504dc81f13c21bdcfb896b931b3d0dbd6941367a8dedd4ece",
+    "campanha.toml": "4c4410dada474870c091e90656e5bff61beb79ab706c667351782612a1bb551a",
+    "orquestrador.py": "5dbe89a5e5b35a963796bd0ace8a0d4ee6c194e95b34c70ceb956f8f5b2b206d",
+    "servidor/agente_exp.sh": "aaa4f9a174fbad12e5bf68d505ff35cf09769ce83dd987cce7469b55585499a0",
+    "servidor/preparar_servidor.sh": "82bf53c43945d62d3e9d06a4f1a8496b83af3b2af50d9b13335b7308525f0584"
+  },
+  "cliente": {
+    "uname": "Linux U-9 6.8.0-146-generic #146-Ubuntu SMP PREEMPT_DYNAMIC Thu Sep  3 16:12:30 UTC 2026 x86_64 x86_64 x86_64 GNU/Linux",
+    "os": "PRETTY_NAME=\"Ubuntu 24.04.5 LTS\"",
+    "cpu": "model name\t: Intel(R) Core(TM) i7-3770 CPU @ 3.40GHz",
+    "nproc": "8",
+    "memoria": "MemTotal:        7803224 kB",
+    "governador_cpu": "schedutil",
+    "ssh_versao": "OpenSSH_10.3-2026-05_p1, Open Quantum Safe 2026-05, OpenSSL 3.0.13 30 Jan 2024",
+    "openssl": "OpenSSL 3.0.13 30 Jan 2024 (Library: OpenSSL 3.0.13 30 Jan 2024)",
+    "compilador_ssh": "GCC: (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+    "tcpdump": [
+      "tcpdump version 4.99.4",
+      "libpcap version 1.10.4 (with TPACKET_V3)"
+    ],
+    "tshark": [
+      "TShark (Wireshark) 4.2.2 (Git v4.2.2 packaged as 4.2.2-1.1build3)."
+    ],
+    "python": "3.12.3 (main, Aug 31 2026, 10:18:26) [GCC 13.3.0]",
+    "offloads": "tcp-segmentation-offload: on\ngeneric-segmentation-offload: on\ngeneric-receive-offload: on"
+  },
+  "compilacao": {
+    "openssh_commit": "08710c570b0018e7ee1c4ad0e6534bff4afbba58",
+    "openssh_describe": "V_7_7_P1-4526-g08710c570",
+    "openssh_configure": "$ ./configure --with-oqs-dir=/usr/local 'LDFLAGS=-L/usr/local/lib -L/usr/local/lib64' LIBS=-loqs --prefix=/usr/local",
+    "openssh_cc": "CC=cc",
+    "openssh_cflags": "CFLAGS=-g -O2 -pipe -Wno-error=format-truncation -Wall -Wextra -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wsizeof-pointer-memaccess -Wno-pointer-sign -Wno-unused-parameter -Wno-unused-result -Wimplicit-fallthrough -Wmisleading-indentation -fno-strict-aliasing -D_FORTIFY_SOURCE=2 -ftrapv -fzero-call-used-regs=used -ftrivial-auto-var-init=zero -fno-builtin-memset -fstack-protector-strong -fPIE",
+    "liboqs_commit": "5a1a854b0dc9f2141bdc771c555ee60c37950183",
+    "liboqs_versao": "#define OQS_VERSION_TEXT \"0.16.0\"",
+    "liboqs_build_type": "CMAKE_BUILD_TYPE:STRING=Release",
+    "liboqs_compilador": "CMAKE_C_COMPILER:FILEPATH=/usr/bin/cc",
+    "liboqs_cflags": "CMAKE_C_FLAGS:STRING="
+  },
+  "servidor": "### uname\nLinux matheus-VirtualBox 7.0.0-28-generic #28~24.04.1-Ubuntu SMP PREEMPT_DYNAMIC Wed Jul  1 15:50:57 UTC 2 x86_64 x86_64 x86_64 GNU/Linux\n### os-release\nPRETTY_NAME=\"Ubuntu 24.04.3 LTS\"\nNAME=\"Ubuntu\"\nVERSION_ID=\"24.04\"\nVERSION=\"24.04.3 LTS (Noble Numbat)\"\nVERSION_CODENAME=noble\nID=ubuntu\nID_LIKE=debian\nHOME_URL=\"https://www.ubuntu.com/\"\nSUPPORT_URL=\"https://help.ubuntu.com/\"\nBUG_REPORT_URL=\"https://bugs.launchpad.net/ubuntu/\"\nPRIVACY_POLICY_URL=\"https://www.ubuntu.com/legal/terms-and-policies/privacy-policy\"\nUBUNTU_CODENAME=noble\nLOGO=ubuntu-logo\n### nproc\n3\n### lscpu\nCPU(s):                                  3\nModel name:                              Intel(R) Core(TM) i7-3770 CPU @ 3.40GHz\nBIOS Model name:                           CPU @ 0.0GHz\nThread(s) per core:                      1\nCore(s) per socket:                      3\nSocket(s):                               1\n### memoria\n               total        used        free      shared  buff/cache   available\nMem:      4101275648  1192173568   797724672    26374144  2369597440  2909102080\nSwap:     4106219520           0  4106219520\n### sshd_bin\nExecStart={ path=/usr/local/sbin/sshd ; argv[]=/usr/local/sbin/sshd -D -f /etc/ssh-exp/sshd_config ; ignore_errors=no ; start_time=[Tue 2026-10-13 20:00:44 -03] ; stop_time=[n/a] ; pid=4739 ; code=(null) ; status=0/0 }\n### sshd_config_efetiva\nport 2222\ncompression yes\nciphers chacha20-poly1305@openssh.com,aes128-ctr,aes192-ctr,aes256-ctr,aes128-gcm@openssh.com,aes256-gcm@openssh.com\nmacs umac-64-etm@openssh.com,umac-128-etm@openssh.com,hmac-sha2-256-etm@openssh.com,hmac-sha2-512-etm@openssh.com,hmac-sha1-etm@openssh.com,umac-64@openssh.com,umac-128@openssh.com,hmac-sha2-256,hmac-sha2-512,hmac-sha1\nkexalgorithms curve25519-sha256,curve25519-sha256@libssh.org,ecdh-sha2-nistp256,ecdh-sha2-nistp384,ecdh-sha2-nistp521,diffie-hellman-group-exchange-sha256,diffie-hellman-group16-sha512,diffie-hellman-group18-sha512,diffie-hellman-group14-sha256,frodokem-640-aes-sha256,ecdh-nistp256-frodokem-640-aesr2-sha256@openquantumsafe.org,x25519-frodokem-640-aesr2-sha256@openquantumsafe.org,frodokem-976-aes-sha384,ecdh-nistp384-frodokem-976-aesr2-sha384@openquantumsafe.org,frodokem-1344-aes-sha512,ecdh-nistp521-frodokem-1344-aesr2-sha512@openquantumsafe.org,frodokem-640-shake-sha256,ecdh-nistp256-frodokem-640-shaker2-sha256@openquantumsafe.org,x25519-frodokem-640-shaker2-sha256@openquantumsafe.org,frodokem-976-shake-sha384,ecdh-nistp384-frodokem-976-shaker2-sha384@openquantumsafe.org,frodokem-1344-shake-sha512,ecdh-nistp521-frodokem-1344-shaker2-sha512@openquantumsafe.org,kyber-512-sha256,ecdh-nistp256-kyber-512r3-sha256-d00@openquantumsafe.org,x25519-kyber-512r3-sha256-d00@amazon.com,kyber-768-sha384,ecdh-nistp384-kyber-768r3-sha384-d00@openquantumsafe.org,kyber-1024-sha512,ecdh-nistp521-kyber-1024r3-sha512-d00@openquantumsafe.org,bike-l1-sha512,ecdh-nistp256-bike-l1r4-sha512@openquantumsafe.org,x25519-bike-l1r4-sha512@openquantumsafe.org,bike-l3-sha512,ecdh-nistp384-bike-l3r4-sha512@openquantumsafe.org,bike-l5-sha512,ecdh-nistp521-bike-l5r4-sha512@openquantumsafe.org,classic-mceliece-348864-sha256,ecdh-nistp256-classic-mceliece-348864r4-sha256@openquantumsafe.org,x25519-classic-mceliece-348864r4-sha256@openquantumsafe.org,classic-mceliece-348864f-sha256,ecdh-nistp256-classic-mceliece-348864fr4-sha256@openquantumsafe.org,x25519-classic-mceliece-348864fr4-sha256@openquantumsafe.org,classic-mceliece-460896-sha512,ecdh-nistp384-classic-mceliece-460896r4-sha512@openquantumsafe.org,classic-mceliece-460896f-sha512,ecdh-nistp384-classic-mceliece-460896fr4-sha512@openquantumsafe.org,classic-mceliece-6688128-sha512,ecdh-nistp521-classic-mceliece-6688128r4-sha512@openquantumsafe.org,classic-mceliece-6688128f-sha512,ecdh-nistp521-classic-mceliece-6688128fr4-sha512@openquantumsafe.org,classic-mceliece-6960119-sha512,ecdh-nistp521-classic-mceliece-6960119r4-sha512@openquantumsafe.org,classic-mceliece-6960119f-sha512,ecdh-nistp521-classic-mceliece-6960119fr4-sha512@openquantumsafe.org,classic-mceliece-8192128-sha512,ecdh-nistp521-classic-mceliece-8192128r4-sha512@openquantumsafe.org,classic-mceliece-8192128f-sha512,ecdh-nistp521-classic-mceliece-8192128fr4-sha512@openquantumsafe.org,mlkem512-sha256,ecdh-nistp256-ml-kem-512-sha256@openquantumsafe.org,x25519-ml-kem-512-sha256@openquantumsafe.org,mlkem768-sha256,mlkem768nistp256-sha256,mlkem768x25519-sha256,mlkem1024-sha384,mlkem1024nistp384-sha384,sntrup761-sha512,sntrup761x25519-sha512@openssh.com\nhostkeyalgorithms ssh-ed25519-cert-v01@openssh.com,ecdsa-sha2-nistp256-cert-v01@openssh.com,ecdsa-sha2-nistp384-cert-v01@openssh.com,ecdsa-sha2-nistp521-cert-v01@openssh.com,sk-ssh-ed25519-cert-v01@openssh.com,sk-ecdsa-sha2-nistp256-cert-v01@openssh.com,webauthn-sk-ecdsa-sha2-nistp256-cert-v01@openssh.com,rsa-sha2-512-cert-v01@openssh.com,rsa-sha2-256-cert-v01@openssh.com,ssh-ed25519,ecdsa-sha2-nistp256,ecdsa-sha2-nistp384,ecdsa-sha2-nistp521,sk-ssh-ed25519@openssh.com,sk-ecdsa-sha2-nistp256@openssh.com,webauthn-sk-ecdsa-sha2-nistp256@openssh.com,rsa-sha2-512,rsa-sha2-256\nloglevel INFO\nmaxstartups 10:30:100\nrekeylimit 0 0\n### sshd_config_sistema_kex\nkexalgorithms curve25519-sha256,curve25519-sha256@libssh.org,ecdh-sha2-nistp256,ecdh-sha2-nistp384,ecdh-sha2-nistp521,diffie-hellman-group-exchange-sha256,diffie-hellman-group16-sha512,diffie-hellman-group18-sha512,diffie-hellman-group14-sha256,frodokem-640-aes-sha256,ecdh-nistp256-frodokem-640-aesr2-sha256@openquantumsafe.org,x25519-frodokem-640-aesr2-sha256@openquantumsafe.org,frodokem-976-aes-sha384,ecdh-nistp384-frodokem-976-aesr2-sha384@openquantumsafe.org,frodokem-1344-aes-sha512,ecdh-nistp521-frodokem-1344-aesr2-sha512@openquantumsafe.org,frodokem-640-shake-sha256,ecdh-nistp256-frodokem-640-shaker2-sha256@openquantumsafe.org,x25519-frodokem-640-shaker2-sha256@openquantumsafe.org,frodokem-976-shake-sha384,ecdh-nistp384-frodokem-976-shaker2-sha384@openquantumsafe.org,frodokem-1344-shake-sha512,ecdh-nistp521-frodokem-1344-shaker2-sha512@openquantumsafe.org,kyber-512-sha256,ecdh-nistp256-kyber-512r3-sha256-d00@openquantumsafe.org,x25519-kyber-512r3-sha256-d00@amazon.com,kyber-768-sha384,ecdh-nistp384-kyber-768r3-sha384-d00@openquantumsafe.org,kyber-1024-sha512,ecdh-nistp521-kyber-1024r3-sha512-d00@openquantumsafe.org,bike-l1-sha512,ecdh-nistp256-bike-l1r4-sha512@openquantumsafe.org,x25519-bike-l1r4-sha512@openquantumsafe.org,bike-l3-sha512,ecdh-nistp384-bike-l3r4-sha512@openquantumsafe.org,bike-l5-sha512,ecdh-nistp521-bike-l5r4-sha512@openquantumsafe.org,classic-mceliece-348864-sha256,ecdh-nistp256-classic-mceliece-348864r4-sha256@openquantumsafe.org,x25519-classic-mceliece-348864r4-sha256@openquantumsafe.org,classic-mceliece-348864f-sha256,ecdh-nistp256-classic-mceliece-348864fr4-sha256@openquantumsafe.org,x25519-classic-mceliece-348864fr4-sha256@openquantumsafe.org,classic-mceliece-460896-sha512,ecdh-nistp384-classic-mceliece-460896r4-sha512@openquantumsafe.org,classic-mceliece-460896f-sha512,ecdh-nistp384-classic-mceliece-460896fr4-sha512@openquantumsafe.org,classic-mceliece-6688128-sha512,ecdh-nistp521-classic-mceliece-6688128r4-sha512@openquantumsafe.org,classic-mceliece-6688128f-sha512,ecdh-nistp521-classic-mceliece-6688128fr4-sha512@openquantumsafe.org,classic-mceliece-6960119-sha512,ecdh-nistp521-classic-mceliece-6960119r4-sha512@openquantumsafe.org,classic-mceliece-6960119f-sha512,ecdh-nistp521-classic-mceliece-6960119fr4-sha512@openquantumsafe.org,classic-mceliece-8192128-sha512,ecdh-nistp521-classic-mceliece-8192128r4-sha512@openquantumsafe.org,classic-mceliece-8192128f-sha512,ecdh-nistp521-classic-mceliece-8192128fr4-sha512@openquantumsafe.org,mlkem512-sha256,ecdh-nistp256-ml-kem-512-sha256@openquantumsafe.org,x25519-ml-kem-512-sha256@openquantumsafe.org,mlkem768-sha256,mlkem768nistp256-sha256,mlkem768x25519-sha256,mlkem1024-sha384,mlkem1024nistp384-sha384,sntrup761-sha512,sntrup761x25519-sha512@openssh.com\n### sshd_versao\nOpenSSH_10.3-2026-05_p1, Open Quantum Safe 2026-05, OpenSSL 3.0.13 30 Jan 2024\n### offloads\n-- enp0s3\ntcp-segmentation-offload: on\ngeneric-segmentation-offload: on\ngeneric-receive-offload: on\n-- enp0s8\ntcp-segmentation-offload: on\ngeneric-segmentation-offload: on\ngeneric-receive-offload: on\n### kernel\n7.0.0-28-generic\n",
+  "condicoes": [
+    {
+      "nome": "base",
+      "rtt_config_ms": 0,
+      "banda_config_mbit": 0,
+      "inicio": "2026-10-13T20:02:18.079-03:00",
+      "qdisc_cliente": "qdisc fq_codel 0: root refcnt 2 limit 10240p flows 1024 quantum 1514 target 5ms interval 100ms memory_limit 32Mb ecn drop_batch 64",
+      "qdisc_servidor": "qdisc fq_codel 0: root refcnt 2 limit 10240p flows 1024 quantum 1514 target 5ms interval 100ms memory_limit 32Mb ecn drop_batch 64 \n",
+      "perda_induzida": "nenhuma",
+      "ping": {
+        "rtt_min_ms": 0.135,
+        "rtt_media_ms": 0.219,
+        "rtt_max_ms": 0.276,
+        "rtt_mdev_ms": 0.049,
+        "perda_pct": 0.0
+      },
+      "aquecimento_por_cenario": 1,
+      "tcpdump": {
+        "pacotes_capturados": 444,
+        "descartados_kernel": 0
+      },
+      "fim": "2026-10-13T20:02:32.332-03:00"
+    },
+    {
+      "nome": "rtt50",
+      "rtt_config_ms": 50,
+      "banda_config_mbit": 0,
+      "inicio": "2026-10-13T20:02:32.374-03:00",
+      "qdisc_cliente": "qdisc netem 8004: root refcnt 2 limit 10000 delay 25ms",
+      "qdisc_servidor": "qdisc netem 8004: root refcnt 2 limit 10000 delay 25ms\n",
+      "perda_induzida": "nenhuma",
+      "ping": {
+        "rtt_min_ms": 50.234,
+        "rtt_media_ms": 50.469,
+        "rtt_max_ms": 50.62,
+        "rtt_mdev_ms": 0.128,
+        "perda_pct": 0.0
+      },
+      "aquecimento_por_cenario": 1,
+      "tcpdump": {
+        "pacotes_capturados": 671,
+        "descartados_kernel": 0
+      },
+      "fim": "2026-10-13T20:03:00.523-03:00"
+    },
+    {
+      "nome": "rtt100",
+      "rtt_config_ms": 100,
+      "banda_config_mbit": 0,
+      "inicio": "2026-10-13T20:03:00.612-03:00",
+      "qdisc_cliente": "qdisc netem 8005: root refcnt 2 limit 10000 delay 50ms",
+      "qdisc_servidor": "qdisc netem 8005: root refcnt 2 limit 10000 delay 50ms\n",
+      "perda_induzida": "nenhuma",
+      "ping": {
+        "rtt_min_ms": 100.213,
+        "rtt_media_ms": 100.407,
+        "rtt_max_ms": 100.538,
+        "rtt_mdev_ms": 0.095,
+        "perda_pct": 0.0
+      },
+      "aquecimento_por_cenario": 1,
+      "tcpdump": {
+        "pacotes_capturados": 666,
+        "descartados_kernel": 0
+      },
+      "fim": "2026-10-13T20:03:43.495-03:00"
+    },
+    {
+      "nome": "banda10",
+      "rtt_config_ms": 0,
+      "banda_config_mbit": 10,
+      "inicio": "2026-10-13T20:03:43.634-03:00",
+      "qdisc_cliente": "qdisc netem 8006: root refcnt 2 limit 10000 rate 10Mbit",
+      "qdisc_servidor": "qdisc netem 8006: root refcnt 2 limit 10000 rate 10Mbit\n",
+      "perda_induzida": "nenhuma",
+      "ping": {
+        "rtt_min_ms": 0.361,
+        "rtt_media_ms": 0.729,
+        "rtt_max_ms": 1.244,
+        "rtt_mdev_ms": 0.265,
+        "perda_pct": 0.0
+      },
+      "aquecimento_por_cenario": 1,
+      "tcpdump": {
+        "pacotes_capturados": 443,
+        "descartados_kernel": 0
+      },
+      "fim": "2026-10-13T20:04:19.093-03:00"
+    }
+  ],
+  "id_campanha": "20261013T200217_teste",
+  "servidor_interface": "enp0s8",
+  "fim": "2026-10-13T20:04:19.145-03:00"
+}

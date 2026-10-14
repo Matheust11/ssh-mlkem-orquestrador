@@ -1,0 +1,86 @@
+# ============================================================
+# Configuração da campanha do orquestrador
+# Tudo o que muda entre campanhas fica aqui, não no código.
+# ============================================================
+
+[cliente]
+ssh_bin = "/usr/local/bin/ssh"
+interface = "vboxnet0"
+ip = "192.168.56.1"
+# Fontes usadas para registrar commit, versão e opções de compilação
+openssh_src = "~/openssh"
+liboqs_src = "~/liboqs"
+
+[servidor]
+host = "192.168.56.102"
+usuario = "matheus"
+porta_experimento = 2222   # sshd experimental (cgroup dedicado)
+porta_controle = 22        # sshd do sistema, usado só pelo orquestrador
+
+[campanha]
+repeticoes = 30            # rodadas por condição de rede
+aquecimento = 3            # conexões de aquecimento por cenário e condição
+pausa_s = 0.5              # intervalo entre conexões
+timeout_conexao_s = 30     # acima disso a tentativa é registrada como timeout
+comando_verificacao = "echo ok"
+
+[[cenarios]]
+nome = "classico"
+kex = "curve25519-sha256"
+
+[[cenarios]]
+nome = "hibrido"
+kex = "mlkem768x25519-sha256"
+
+[[cenarios]]
+nome = "pqc"
+kex = "mlkem768-sha256"
+
+# ------------------------------------------------------------
+# Condições de rede (tc netem). rtt_ms é dividido igualmente
+# entre os dois sentidos (metade no cliente, metade no servidor).
+# banda_mbit = 0 significa sem limite. A banda é aplicada nos
+# dois sentidos.
+# ------------------------------------------------------------
+
+[[condicoes]]
+nome = "base"
+rtt_ms = 0
+banda_mbit = 0
+
+[[condicoes]]
+nome = "rtt50"
+rtt_ms = 50
+banda_mbit = 0
+
+[[condicoes]]
+nome = "rtt100"
+rtt_ms = 100
+banda_mbit = 0
+
+[[condicoes]]
+nome = "banda10"
+rtt_ms = 0
+banda_mbit = 10
+
+[estabilidade]
+executar = true
+repeticoes = 10
+rekey_limite = "1M"        # RekeyLimit do cliente no teste de rekey
+rekey_bytes = 8388608      # bytes transferidos no teste de rekey (8 MiB)
+kex_nao_suportado = "ecdh-sha2-nistp256"
+kex_preferido_fallback = "sntrup761x25519-sha512"
+
+# ------------------------------------------------------------
+# Módulos opcionais (desligados por padrão; ative com
+# --com-primitivas e/ou --com-vazao). Rodam só na condição base.
+# ------------------------------------------------------------
+
+[opcionais.primitivas]
+dir_origem = "~/Documents/Academicos/TCC/tcc_mlkem/metrica5_cpu_cycles"
+repeticoes = 30
+
+[opcionais.vazao]
+concorrencias = [1, 2, 4, 8]
+rodadas = 30
+pausa_s = 2.0

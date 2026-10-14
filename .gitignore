@@ -1,0 +1,6 @@
+# Binário gerado automaticamente a partir de medidor.c
+medidor
+# Arquivos temporários
+__pycache__/
+*.pyc
+campanhas/*/*.pid

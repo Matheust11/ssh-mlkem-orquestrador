@@ -1,0 +1,25 @@
+condicao,teste,cenario,repeticao,resultado,rc,kex_solicitado,kex_negociado,fallback,etapa_falha,erro,detalhe,servidor_ativo,instante
+base,rekey,classico,1,sucesso,0,curve25519-sha256,curve25519-sha256,,,,newkeys=8; bytes=8388608,True,2026-10-13T19:51:21.356-03:00
+base,rekey,hibrido,1,sucesso,0,mlkem768x25519-sha256,mlkem768x25519-sha256,,,,newkeys=8; bytes=8388608,True,2026-10-13T19:51:21.803-03:00
+base,rekey,pqc,1,sucesso,0,mlkem768-sha256,mlkem768-sha256,,,,newkeys=8; bytes=8388608,True,2026-10-13T19:51:22.195-03:00
+base,kex_nao_suportado,,1,rejeicao_controlada,255,ecdh-sha2-nistp256,(no match),,troca_de_chaves,"Unable to negotiate with 192.168.56.102 port 2222: no matching key exchange method found. Their offer: curve25519-sha256,mlkem768x25519-sha256,mlkem768-sha256,ext-info-s,kex-strict-s-v00@openssh.com",,True,2026-10-13T19:51:22.267-03:00
+base,banner_invalido,,1,encerramento_controlado,,,,,,,FIN; banner=b'SSH-2.0-OpenSSH_10.3-2026-05_\r\n'; resposta=b'Invalid SSH identification string.\r\n',True,2026-10-13T19:51:22.336-03:00
+base,pacote_invalido,,1,encerramento_controlado,,,,,,,"FIN; banner=b'SSH-2.0-OpenSSH_10.3-2026-05_\r\n'; resposta=b'\x00\x00\x03l\x0b\x14\x1fn\x0fl\xc2\xf3\xea\xfc\xa4\xfe\x90P\x94#\n\x80\x00\x00\x00_curve25519-sha256,mlkem768x25519-sha256,mlkem768-sha25'",True,2026-10-13T19:51:22.397-03:00
+rtt50,rekey,classico,1,sucesso,0,curve25519-sha256,curve25519-sha256,,,,newkeys=4; bytes=8388608,True,2026-10-13T19:51:43.131-03:00
+rtt50,rekey,hibrido,1,sucesso,0,mlkem768x25519-sha256,mlkem768x25519-sha256,,,,newkeys=4; bytes=8388608,True,2026-10-13T19:51:44.685-03:00
+rtt50,rekey,pqc,1,sucesso,0,mlkem768-sha256,mlkem768-sha256,,,,newkeys=4; bytes=8388608,True,2026-10-13T19:51:46.204-03:00
+rtt50,kex_nao_suportado,,1,rejeicao_controlada,255,ecdh-sha2-nistp256,(no match),,troca_de_chaves,"Unable to negotiate with 192.168.56.102 port 2222: no matching key exchange method found. Their offer: curve25519-sha256,mlkem768x25519-sha256,mlkem768-sha256,ext-info-s,kex-strict-s-v00@openssh.com",,True,2026-10-13T19:51:46.476-03:00
+rtt50,banner_invalido,,1,encerramento_controlado,,,,,,,FIN; banner=b'SSH-2.0-OpenSSH_10.3-2026-05_\r\n'; resposta=b'Invalid SSH identification string.\r\n',True,2026-10-13T19:51:46.795-03:00
+rtt50,pacote_invalido,,1,encerramento_controlado,,,,,,,"FIN; banner=b'SSH-2.0-OpenSSH_10.3-2026-05_\r\n'; resposta=b'\x00\x00\x03l\x0b\x14u\x9b6\x1b\x99\xc2\x1d\xb8\xce\x10\xa6\x84\xe2\x84\xac\xe8\x00\x00\x00_curve25519-sha256,mlkem768x25519-sha256,mlkem768-sha25'",True,2026-10-13T19:51:47.114-03:00
+rtt100,rekey,classico,1,sucesso,0,curve25519-sha256,curve25519-sha256,,,,newkeys=4; bytes=8388608,True,2026-10-13T19:52:16.468-03:00
+rtt100,rekey,hibrido,1,sucesso,0,mlkem768x25519-sha256,mlkem768x25519-sha256,,,,newkeys=4; bytes=8388608,True,2026-10-13T19:52:19.405-03:00
+rtt100,rekey,pqc,1,sucesso,0,mlkem768-sha256,mlkem768-sha256,,,,newkeys=3; bytes=8388608,True,2026-10-13T19:52:22.106-03:00
+rtt100,kex_nao_suportado,,1,rejeicao_controlada,255,ecdh-sha2-nistp256,(no match),,troca_de_chaves,"Unable to negotiate with 192.168.56.102 port 2222: no matching key exchange method found. Their offer: curve25519-sha256,mlkem768x25519-sha256,mlkem768-sha256,ext-info-s,kex-strict-s-v00@openssh.com",,True,2026-10-13T19:52:22.569-03:00
+rtt100,banner_invalido,,1,encerramento_controlado,,,,,,,FIN; banner=b'SSH-2.0-OpenSSH_10.3-2026-05_\r\n'; resposta=b'Invalid SSH identification string.\r\n',True,2026-10-13T19:52:23.127-03:00
+rtt100,pacote_invalido,,1,encerramento_controlado,,,,,,,"FIN; banner=b'SSH-2.0-OpenSSH_10.3-2026-05_\r\n'; resposta=b'\x00\x00\x03l\x0b\x14\xa9O\xb4Q\x07\xe1cI\xd4\x1e\xa6\x0e\x81\xf6\x13\x85\x00\x00\x00_curve25519-sha256,mlkem768x25519-sha256,mlkem768-sha25'",True,2026-10-13T19:52:23.685-03:00
+banda10,rekey,classico,1,sucesso,0,curve25519-sha256,curve25519-sha256,,,,newkeys=3; bytes=8388608,True,2026-10-13T19:52:43.451-03:00
+banda10,rekey,hibrido,1,sucesso,0,mlkem768x25519-sha256,mlkem768x25519-sha256,,,,newkeys=3; bytes=8388608,True,2026-10-13T19:52:50.762-03:00
+banda10,rekey,pqc,1,sucesso,0,mlkem768-sha256,mlkem768-sha256,,,,newkeys=3; bytes=8388608,True,2026-10-13T19:52:58.037-03:00
+banda10,kex_nao_suportado,,1,rejeicao_controlada,255,ecdh-sha2-nistp256,(no match),,troca_de_chaves,"Unable to negotiate with 192.168.56.102 port 2222: no matching key exchange method found. Their offer: curve25519-sha256,mlkem768x25519-sha256,mlkem768-sha256,ext-info-s,kex-strict-s-v00@openssh.com",,True,2026-10-13T19:52:58.115-03:00
+banda10,banner_invalido,,1,encerramento_controlado,,,,,,,FIN; banner=b'SSH-2.0-OpenSSH_10.3-2026-05_\r\n'; resposta=b'Invalid SSH identification string.\r\n',True,2026-10-13T19:52:58.174-03:00
+banda10,pacote_invalido,,1,encerramento_controlado,,,,,,,"FIN; banner=b'SSH-2.0-OpenSSH_10.3-2026-05_\r\n'; resposta=b'\x00\x00\x03l\x0b\x14m\x99Mn\x01\x82\xdbR\xd8\xee\x91\xcf\xb9\xaen\x00\x00\x00\x00_curve25519-sha256,mlkem768x25519-sha256,mlkem768-sha25'",True,2026-10-13T19:52:58.244-03:00

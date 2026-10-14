@@ -1,0 +1,4 @@
+tcpdump: listening on vboxnet0, link-type EN10MB (Ethernet), snapshot length 262144 bytes
+4919 packets captured
+4919 packets received by filter
+0 packets dropped by kernel

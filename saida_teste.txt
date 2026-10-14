@@ -1,0 +1,49 @@
+[19:50:56] Campanha 20261013T195056_teste -> /home/matheus-dev/Documents/Academicos/TCC/tcc_mlkem/orquestrador/campanhas/20261013T195056_teste
+[19:51:07] Verificando o servidor (agente e sshd experimental)...
+[19:51:09] ===== Condição base: RTT 0 ms, banda sem limite Mbit/s =====
+[19:51:12] RTT observado (ping): 0.194 ms; perda 0.0%
+[19:51:12] Aquecimento: 1 conexão(ões) por cenário
+[19:51:15]   r01/2 p1 classico  OK       proc=   159.2 ms  cpu_cli=  17.0 ms  cpu_srv=  54.2 ms
+[19:51:16]   r01/2 p2 hibrido   OK       proc=   162.7 ms  cpu_cli=  19.7 ms  cpu_srv=  56.4 ms
+[19:51:16]   r01/2 p3 pqc       OK       proc=   158.0 ms  cpu_cli=  13.0 ms  cpu_srv=  55.0 ms
+[19:51:17]   r02/2 p1 hibrido   OK       proc=   164.2 ms  cpu_cli=  18.3 ms  cpu_srv=  60.1 ms
+[19:51:18]   r02/2 p2 pqc       OK       proc=   157.1 ms  cpu_cli=  13.0 ms  cpu_srv=  55.0 ms
+[19:51:19]   r02/2 p3 classico  OK       proc=   168.1 ms  cpu_cli=  16.5 ms  cpu_srv=  63.2 ms
+[19:51:20] Captura encerrada: {'pacotes_capturados': 436, 'descartados_kernel': 0}. Analisando com tshark...
+[19:51:20] Testes de estabilidade e de tratamento de erros...
+[19:51:22] ===== Condição rtt50: RTT 50 ms, banda sem limite Mbit/s =====
+[19:51:25] RTT observado (ping): 50.515 ms; perda 0.0%
+[19:51:25] Aquecimento: 1 conexão(ões) por cenário
+[19:51:31]   r01/2 p1 classico  OK       proc=   762.5 ms  cpu_cli=  22.1 ms  cpu_srv=  61.8 ms
+[19:51:33]   r01/2 p2 hibrido   OK       proc=   759.4 ms  cpu_cli=  22.6 ms  cpu_srv=  62.5 ms
+[19:51:34]   r01/2 p3 pqc       OK       proc=   757.1 ms  cpu_cli=  18.3 ms  cpu_srv=  60.5 ms
+[19:51:36]   r02/2 p1 hibrido   OK       proc=   762.9 ms  cpu_cli=  21.1 ms  cpu_srv=  63.5 ms
+[19:51:37]   r02/2 p2 pqc       OK       proc=   747.7 ms  cpu_cli=  17.0 ms  cpu_srv=  52.7 ms
+[19:51:39]   r02/2 p3 classico  OK       proc=   760.9 ms  cpu_cli=  22.5 ms  cpu_srv=  63.2 ms
+[19:51:41] Captura encerrada: {'pacotes_capturados': 651, 'descartados_kernel': 0}. Analisando com tshark...
+[19:51:41] Testes de estabilidade e de tratamento de erros...
+[19:51:47] ===== Condição rtt100: RTT 100 ms, banda sem limite Mbit/s =====
+[19:51:50] RTT observado (ping): 100.363 ms; perda 0.0%
+[19:51:50] Aquecimento: 1 conexão(ões) por cenário
+[19:51:58]   r01/2 p1 classico  OK       proc=  1362.2 ms  cpu_cli=  24.9 ms  cpu_srv=  57.0 ms
+[19:52:01]   r01/2 p2 hibrido   OK       proc=  1359.6 ms  cpu_cli=  25.0 ms  cpu_srv=  59.0 ms
+[19:52:04]   r01/2 p3 pqc       OK       proc=  1350.2 ms  cpu_cli=  18.0 ms  cpu_srv=  54.1 ms
+[19:52:06]   r02/2 p1 hibrido   OK       proc=  1355.4 ms  cpu_cli=  21.2 ms  cpu_srv=  54.7 ms
+[19:52:09]   r02/2 p2 pqc       OK       proc=  1359.1 ms  cpu_cli=  17.6 ms  cpu_srv=  63.2 ms
+[19:52:11]   r02/2 p3 classico  OK       proc=  1365.3 ms  cpu_cli=  22.2 ms  cpu_srv=  68.9 ms
+[19:52:13] Captura encerrada: {'pacotes_capturados': 655, 'descartados_kernel': 0}. Analisando com tshark...
+[19:52:13] Testes de estabilidade e de tratamento de erros...
+[19:52:23] ===== Condição banda10: RTT 0 ms, banda 10 Mbit/s =====
+[19:52:26] RTT observado (ping): 0.754 ms; perda 0.0%
+[19:52:26] Aquecimento: 1 conexão(ões) por cenário
+[19:52:30]   r01/2 p1 classico  OK       proc=   215.2 ms  cpu_cli=  20.7 ms  cpu_srv=  60.3 ms
+[19:52:31]   r01/2 p2 hibrido   OK       proc=   215.3 ms  cpu_cli=  21.4 ms  cpu_srv=  58.6 ms
+[19:52:31]   r01/2 p3 pqc       OK       proc=   216.6 ms  cpu_cli=  20.4 ms  cpu_srv=  57.9 ms
+[19:52:32]   r02/2 p1 hibrido   OK       proc=   222.3 ms  cpu_cli=  21.0 ms  cpu_srv=  66.5 ms
+[19:52:33]   r02/2 p2 pqc       OK       proc=   210.8 ms  cpu_cli=  18.2 ms  cpu_srv=  54.0 ms
+[19:52:34]   r02/2 p3 classico  OK       proc=   212.3 ms  cpu_cli=  20.7 ms  cpu_srv=  58.9 ms
+[19:52:35] Captura encerrada: {'pacotes_capturados': 426, 'descartados_kernel': 0}. Analisando com tshark...
+[19:52:36] Testes de estabilidade e de tratamento de erros...
+[19:52:58] Calculando estatísticas...
+Estatísticas gravadas em /home/matheus-dev/Documents/Academicos/TCC/tcc_mlkem/orquestrador/campanhas/20261013T195056_teste
+[19:52:58] Concluído. Resultados em /home/matheus-dev/Documents/Academicos/TCC/tcc_mlkem/orquestrador/campanhas/20261013T195056_teste
