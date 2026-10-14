@@ -224,7 +224,7 @@ chaves de sessão; o tráfego SSH das capturas é cifrado.
 
 ## Como citar
 
-TORRES SOBRINHO, M. A. **ssh-mlkem-orquestrador**: orquestrador de coleta
+SOBRINHO, M. A. T. **ssh-mlkem-orquestrador**: orquestrador de coleta
 e dados experimentais do ML-KEM-768 no SSH. 2026. Disponível em:
 https://github.com/Matheust11/ssh-mlkem-orquestrador.
 

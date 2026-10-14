@@ -14,7 +14,7 @@ foram feitas alterações.
 
 Atribuição sugerida:
 
-> TORRES SOBRINHO, M. A. **ssh-mlkem-orquestrador**: orquestrador de coleta
+> SOBRINHO, M. A. T. **ssh-mlkem-orquestrador**: orquestrador de coleta
 > e dados experimentais do ML-KEM-768 no SSH. 2026. Disponível em:
 > https://github.com/Matheust11/ssh-mlkem-orquestrador.
 
