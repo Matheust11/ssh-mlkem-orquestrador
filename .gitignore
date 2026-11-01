@@ -4,3 +4,9 @@ medidor
 __pycache__/
 *.pyc
 campanhas/*/*.pid
+# Ambientes e editores
+.venv/
+venv/
+.vscode/
+.idea/
+.DS_Store
